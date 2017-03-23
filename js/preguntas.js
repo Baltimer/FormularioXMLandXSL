@@ -1,6 +1,9 @@
 //**********************************************************************************************
 //VARIABLES DE CONTROL
 //**********************************************************************************************
+var xmlDoc = null;
+var xslDoc = null;
+
 var formContainer = null;
 var nota = 0.0;
 var numeroPreguntas = 10;
@@ -77,7 +80,7 @@ window.onload = function(){
 // Recuperamos los datos del fichero XML xml/preguntas.xml
 // xmlDOC es el documento leido XML. 
 function gestionarXml(dadesXml){
-	var xmlDoc = dadesXml.responseXML; //Parse XML to xmlDoc
+	xmlDoc = dadesXml.responseXML; //Parse XML to xmlDoc
 	var tipo = "";
 	var numeroCajaTexto = 0;
 	divNota();
@@ -144,17 +147,18 @@ function imprimirTituloPregunta(i, xmlDoc){
 }
 
 function imprimirOpcionesSelect(i, xmlDoc) {
-	var numOpciones = xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option').length;
-	var opt = xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option');
+	var xpath = "/questions/question["+(i+1)+"]/option";
+	var nodes = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
+	var result = nodes.iterateNext();
 	var select = document.createElement("select");
 	select.id = "select"+i;
 	document.getElementById('pregunta'+i).appendChild(select);
-	for (j = 0; j < numOpciones; j++) { 
+	while(result) {
 		var option = document.createElement("option");
-		option.text = opt[j].innerHTML;
-		option.value = j ;
+		option.text = result.innerHTML;
 		select.options.add(option);
-	}  
+		result = nodes.iterateNext();
+	}
 }
 
 function imprimirCajaText(numeroCajaTexto, xmlDoc) {
@@ -166,12 +170,14 @@ function imprimirCajaText(numeroCajaTexto, xmlDoc) {
 
 
 function imprimirCheckBox(i, xmlDoc) {
-	var numOpciones = xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option').length;
-	var opt = xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option');
-	for (j = 0; j < numOpciones; j++) {
+	var xpath = "/questions/question["+(i+1)+"]/option";
+	var nodes = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
+	var result = nodes.iterateNext();
+	var j = 0;
+	while (result) {
 		var label = document.createElement("label");
 		var input = document.createElement("input");
-		label.innerHTML=opt[j].innerHTML;
+		label.innerHTML=result.innerHTML;
 		input.type="checkbox";
 		input.name="preg"+i;
 		input.id="preg"+i+"ans"+j;
@@ -179,15 +185,19 @@ function imprimirCheckBox(i, xmlDoc) {
 		document.getElementById('pregunta'+i).appendChild(input);
 		document.getElementById('pregunta'+i).appendChild(label);
 		document.getElementById('pregunta'+i).appendChild(document.createElement("br"));
+		result = nodes.iterateNext();
+		j++
 	}
 }
 
 function imprimirRadioButton(i, xmlDoc) {
-	var numOpciones = xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option').length;
-	var opt = xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option');
-	for (j = 0; j < numOpciones; j++) {
+	var xpath="/questions/question["+(i+1)+"]/option" ; 
+	var nodes = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
+	var result = nodes.iterateNext();
+	var j = 0;
+	while (result) {
 		var input = document.createElement("input");
-		var answerTitle = opt[j].innerHTML;
+		var answerTitle = result.innerHTML;
 		var span = document.createElement("span");
 		span.innerHTML = answerTitle;
 		input.type="radio";
@@ -197,19 +207,23 @@ function imprimirRadioButton(i, xmlDoc) {
 		document.getElementById('pregunta'+i).appendChild(input);
 		document.getElementById('pregunta'+i).appendChild(span);
 		document.getElementById('pregunta'+i).appendChild(document.createElement("br"));
+		result = nodes.iterateNext();
+		j++;
 	}	
 }
 
 function imprimirSelectMultiple(i, xmlDoc) {
-	var numOpciones = xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option').length;
-	var opt = xmlDoc.getElementsByTagName('question')[i].getElementsByTagName('option');
+	var xpath="/questions/question["+(i+1)+"]/option" ; 
+	var nodes = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
+	var result = nodes.iterateNext();
 	var selectMultiple = document.createElement("select");
 	selectMultiple.multiple="true";
-	for (j = 0; j < numOpciones; j++) {
-		var answerTitle = opt[j].innerHTML;
+	while (result) {
+		var answerTitle = result.innerHTML;
 		var option = document.createElement("option");
 		option.innerHTML = answerTitle;
 		selectMultiple.appendChild(option);
+		result = nodes.iterateNext();
 		}
 	document.getElementById('pregunta'+i).appendChild(selectMultiple);
 }
