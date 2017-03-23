@@ -1,0 +1,90 @@
+body,html{
+	margin:0px
+}
+
+body{
+	background-image: url("../img/patronFondo.png");
+	width:70%;
+	padding-left:15%;
+	padding-right:15%
+} 
+
+#contenido{
+	display: inline-block;
+	background-color:aliceblue;
+	width: 100%;
+}
+
+#contenido h3{
+	text-align: center;
+	font-size: 3vw;
+}
+
+#contenido p{
+	font-size: 2vw;
+	margin-left: 5%;
+}
+
+#contenido li{
+	margin-left: 10%;
+	font-size: 2vw;
+}
+
+#motivos{
+	margin-left: 25% !important;
+}
+/******************************************************************************/
+/* HEADER */
+/******************************************************************************/
+#Header{
+	width:100%;
+	display: inline-block;
+}
+
+#Header img {
+	vertical-align: middle;
+	width: 20%;
+	margin: 1%;
+}
+
+#Header p{
+	width: 70%;
+	font-size: 3vw;
+	margin-left: 5%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/******************************************************************************/
+/* MENU */
+/******************************************************************************/
+/* Remove margins and padding from the list, and add a black background color */
+#menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-size: 1.5vw;
+}
+
+#menu li {
+    float: left;
+}
+
+#menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+#menu li a:hover {
+    background-color: #111;
+}
+
+#menu .selected{
+	background-color: #111;
+}

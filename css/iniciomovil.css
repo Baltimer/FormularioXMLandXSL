@@ -1,0 +1,83 @@
+body,html{
+	margin:0px;
+}
+
+body{
+    background-image: url("../img/patronFondo.png");
+	width:94%;
+	padding-left:3%;
+	padding-right:3%;
+}
+
+#contenido{
+    background-color:aliceblue;
+    padding:3%;
+}
+
+#contenido h3{
+    text-align: center;
+}
+
+#contenido img{
+    width: 100%;
+}
+
+#contenido p{
+    font-size: 4vw;
+    margin-left: 5%;
+}
+
+.motivos{
+    margin-left: 15% !important;
+}
+/******************************************************************************/
+/*HEADER*/
+/******************************************************************************/
+#Header{
+    top: 0px;
+}
+
+#Header img{
+    width: 100%;
+}
+
+#Header p{
+    text-align: center;
+}
+
+#Header p{
+    font-size: 5vw;
+}
+
+/******************************************************************************/
+/*MENU*/
+/******************************************************************************/
+#menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-size: 4vw;
+}
+
+#menu li {
+    float: left;
+}
+
+#menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+#menu li a:hover {
+    background-color: #111;
+}
+
+#menu .selected{
+    background-color: #111;
+}

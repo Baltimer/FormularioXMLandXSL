@@ -1,0 +1,125 @@
+body,html{
+	margin:0px;
+}
+
+body{
+    background-image: url("../img/patronFondo.png");
+	width:94%;
+	padding-left:3%;
+	padding-right:3%;
+}
+
+body,input,select,label{
+	font-size:5vw;
+}
+
+h3{
+	font-size:7vw;
+}
+
+input,select{
+	width:70%;
+    margin-left: 15%;
+}
+
+input[type=checkbox]{
+	width:5%;zoom:1.5
+}
+
+input[type=radio]{
+	width: 5%;zoom:1.5;
+}
+
+#myform{
+	background-color:aliceblue;
+    padding:1%;
+}
+
+#myform select{
+    border-style: outset;
+    border-radius: 10px;
+}
+
+.inputCheckBox {
+    margin-left: 0px; 
+}
+
+.inputRadioButton{
+    margin-left: 0px;
+}
+
+#btnCorregir{
+    width: 40% !important;
+    margin-left: 30%;
+    border-radius: 5px;
+}
+
+#resultadosDiv{
+    background-image: url("../img/fondoRespuesta.png");
+    color: white;
+    display: none;
+}
+
+#resultadosDiv div{
+    border-style: solid none;
+    border-color: snow; 
+    border-radius: 0px;
+}
+
+#resultadosDiv p{
+    padding-left: 1%;   
+}
+
+#nota{
+    text-align: center;
+    text-decoration: underline;
+    font-size: 7vw;
+}
+
+/******************************************************************************/
+/*HEADER*/
+/******************************************************************************/
+#Header{
+    top: 0px;
+}
+
+#Header img{
+    width: 100%;
+}
+
+#Header p{
+    text-align: center;
+}
+
+/******************************************************************************/
+/*MENU*/
+/******************************************************************************/
+#menu {
+    font-size: 4vw !important;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#menu li {
+    float: left;
+}
+
+#menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+#menu li a:hover {
+    background-color: #111;
+}
+
+#menu .selected{
+    background-color: #111;
+}
