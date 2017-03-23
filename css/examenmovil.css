@@ -60,6 +60,17 @@ input[type=radio]{
     display: none;
 }
 
+
+#tablaResultados{
+    background-image: url("../img/fondoRespuesta.png");
+    color: white;
+    display: none;
+}
+
+#tablaResultados h2{
+    text-align: center;
+}
+
 #resultadosDiv div{
     border-style: solid none;
     border-color: snow; 

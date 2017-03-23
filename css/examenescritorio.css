@@ -66,6 +66,16 @@ input[type=checkbox]{
     display: none;
 }
 
+#tablaResultados{
+    background-image: url("../img/fondoRespuesta.png");
+    color: white;
+    display: none;
+}
+
+#tablaResultados h2{
+	text-align: center;
+}
+
 #resultadosDiv div{
 	width: 80%;
 	margin-left: 10%;

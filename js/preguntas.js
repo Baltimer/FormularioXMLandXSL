@@ -53,13 +53,16 @@ window.onload = function(){
 	formContainer.onsubmit=function(){
 		if (comprobar()){
 			document.getElementById("myform").style.display="none";
+			document.getElementById("resultadosDiv")
 			document.getElementById("menu").focus();
+			ocultarDivRespuestas();
 			corregirSelect();
 			corregirText();
 			corregirCheckBox();
 			corregirRadio();
 			corregirSelectMultiple();
 			presentarNota();
+			presentarTablaXSL();
 	 	}
 	 	return false;
 	}
@@ -72,6 +75,16 @@ window.onload = function(){
 		}
 	};
 	xhttp.open("GET", "xml/preguntas.xml", true);
+	xhttp.send();
+
+	//LEER XSL de xml/transform.xsl
+	xhttp = new XMLHttpRequest();
+ 	xhttp.onreadystatechange = function() {
+  		if (this.readyState == 4 && this.status == 200) {
+   			xslDoc=this.responseXML;
+  		}
+ 	};
+ 	xhttp.open("GET", "xml/transform.xsl", true);
 	xhttp.send();
 }
 
@@ -428,6 +441,22 @@ function presentarNota(){
 	}
 }
 
+function presentarTablaXSL(){
+	document.getElementById('tablaResultados').style.display = "block";
+   //Código de transformación XSLT con xmlDoc y xslDoc
+   	if (document.implementation && document.implementation.createDocument) {
+        xsltProcessor = new XSLTProcessor();
+        xsltProcessor.importStylesheet(xslDoc);
+        resultDocument = xsltProcessor.transformToFragment(xmlDoc, document);
+        document.getElementById('tablaResultados').appendChild(resultDocument);
+   	}
+   	var f = formContainer;
+   	var e = f.elements;
+   	for (var i = 0, len = e.length; i < len; ++i) {
+   		e[i].disabled = true;
+	}
+}
+
 function divNota(){
 	var div = document.createElement('div');
 	div.id="nota";
@@ -448,6 +477,12 @@ window.onmousedown = function (e) {
         var select = el.parentNode.cloneNode(true);
         el.parentNode.parentNode.replaceChild(select, el.parentNode);
     }
+}
+
+function ocultarDivRespuestas(){
+	for ( i = 0; i < numeroPreguntas; i++){
+		document.getElementById("correccion"+i).style.display="none";
+	}
 }
 
 function comprobar(){
