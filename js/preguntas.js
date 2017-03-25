@@ -84,7 +84,7 @@ window.onload = function(){
    			xslDoc=this.responseXML;
   		}
  	};
- 	xhttp.open("GET", "xml/transform.xsl", true);
+ 	xhttp.open("GET", "xml/preguntas.xsl", true);
 	xhttp.send();
 }
 
@@ -274,6 +274,9 @@ function corregirSelect() {
   		darRespuestaHtml(preguntasSelect[i],"P" +(preguntasSelect[i]+1)+ ": Incorrecto");
   		darRespuestaHtml(preguntasSelect[i],"La respuesta correcta es: "+valorRespuestaSelect[i]);
   	}
+  	var useranswer = xmlDoc.createElement("useranswer");
+	useranswer.innerHTML = sel.selectedIndex;
+	xmlDoc.getElementsByTagName("question")[preguntasSelect[i]].appendChild(useranswer);
   }
 }
 
@@ -289,6 +292,9 @@ function corregirText() {
 			darRespuestaHtml(preguntasText[i],"P" +(preguntasText[i]+1) + ": Incorrecto");
 			darRespuestaHtml(preguntasText[i],"La respuesta correcta es: "+respuestasText[i]);
 		}
+		var useranswer = xmlDoc.createElement("useranswer");
+		useranswer.innerHTML = input.value;
+		xmlDoc.getElementsByTagName("question")[preguntasText[i]].appendChild(useranswer);
 	}
 }
 
@@ -300,8 +306,12 @@ function corregirCheckBox(){
 	  	for (j = 0; j < inputs.length; j++){
 	  		var encontrado = false;
 		  	if (inputs[j].checked) { 
-		  		bandera = 1;
-		  		for (k = 0; k < respuestasCheckBox[i].length; k++){
+		  		var useranswer = xmlDoc.createElement("useranswer");
+				useranswer.innerHTML = j;
+				xmlDoc.getElementsByTagName("question")[preguntasCheckBox[i]].appendChild(useranswer);
+
+				bandera = 1;
+				for (k = 0; k < respuestasCheckBox[i].length; k++){
 		  			if(j == respuestasCheckBox[i][k])	{
 		  				nota += 1.0/respuestasCheckBox[i].length;
 		  				darRespuestaHtml(preguntasCheckBox[i],"P"+(preguntasCheckBox[i]+1)+" opcion "+(j+1)+": correcta");
@@ -314,6 +324,7 @@ function corregirCheckBox(){
 		  			nota -= 1.0/respuestasCheckBox[i].length;
 		  			darRespuestaHtml(preguntasCheckBox[i],"P"+(preguntasCheckBox[i]+1)+" opcion "+(j+1)+": incorrecta");
 		  		}
+		  		
 		  	}	
 	  	}
 	  	if (hayFallo) {
@@ -335,6 +346,10 @@ function corregirRadio() {
 		var bandera = 0;
 		for (j = 0; j<preguntaRadio.getElementsByTagName('input').length; j++) {
 			if (preguntaRadio.getElementsByTagName('input')[j].checked){
+				var useranswer = xmlDoc.createElement("useranswer");
+				useranswer.innerHTML = j;
+				xmlDoc.getElementsByTagName("question")[preguntasRadio[i]].appendChild(useranswer);
+
 				bandera = 1;
 				if (j == respuestasRadio[i]){
 					nota +=1.0;
@@ -360,6 +375,9 @@ function corregirSelectMultiple() {
 	  	for (j = 0; j < sel.length; j++){
 	  		var encontrado = false;
 		  	if (sel[j].selected) { 
+		  		var useranswer = xmlDoc.createElement("useranswer");
+				useranswer.innerHTML = j;
+				xmlDoc.getElementsByTagName("question")[preguntasSelectMultiple[i]].appendChild(useranswer);
 		  		bandera = 1;
 		  		for (k = 0; k < respuestasSelectMultiple[i].length; k++){
 		  			if(j == respuestasSelectMultiple[i][k])	{

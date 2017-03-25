@@ -3,7 +3,7 @@
 <!DOCTYPE questions SYSTEM "preguntas_esquema.dtd">
 -->
 
-<?xml-stylesheet type="text/xsl" href="transform.xsl"?>
+<?xml-stylesheet type="text/xsl" href="preguntas.xsl"?>
 
 <questions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="preguntas.xsd">
 	<question id="mlag_001">
